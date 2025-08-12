@@ -1,0 +1,721 @@
+/* styles.css */
+:root {
+    /*--font-family: Arial, Helvetica, sans-serif;*/
+    --board-columns: 10;
+    --board-rows: 10;
+    --board-width: 240px;
+    --board-height: auto;
+    --posición-width: 35px;
+    --posición-height: 35px;
+
+}
+
+.powerup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.powerup a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+    /*border: 5px solid #8B4513;*/
+    border-radius: 25px;
+    text-align: center;
+    background-color: #8B4513;
+    padding: 15px 30px;
+    padding-top: 1px;
+    margin: 0 10px; 
+}
+
+.powerup a:hover {
+        background-color: #F4A460;
+}
+
+.contenedor-principal {
+    display: flex;
+    justify-content: flex-start; /* Alinea los elementos hacia la izquierda */
+    align-items: flex-start;
+    gap: 10px; /* Espacio entre los barcos y los tableros */
+    flex-wrap: wrap; /* Asegura que los elementos no se desborden */
+    margin: 20px; /* Añadir espacio alrededor */
+}
+.espacio {
+    margin: 220px; /* Añadir espacio alrededor */
+}
+
+/* Estilos para el contenedor de los barcos */
+.contenedor-barcos {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea los barcos a la izquierda */
+    align-items: flex-start; /* Alinea los barcos a la izquierda */
+    padding: 20px;
+    width: 250px; /* Ancho de los barcos */
+    margin-left: 100px; /* Mueve el contenedor de los barcos hacia la derecha */
+}
+
+/* Contenedor de los barcos */
+.barcos {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los barcos se acomoden en varias filas */
+    gap: 10px; /* Espacio entre los barcos */
+    justify-content: flex-start; /* Alinea los barcos a la izquierda */
+    margin-top: 20px; /* Añadir espacio arriba */
+}
+
+/* Estilo para cada barco */
+.barco {
+    width: 50px; /* Ajusta el tamaño de los barcos */
+    cursor: pointer;
+    user-select: none; /* Evita que el texto se seleccione */
+    transition: transform 0.3s ease;
+}
+
+/* Efecto al pasar el ratón sobre el barco */
+.barco:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño del barco */
+}
+
+/* Estilos para los tableros */
+.tableros {
+    display: flex;
+    justify-content: center; /* Centra los tableros */
+    gap: 20px; /* Espacio entre el tablero propio y el tablero enemigo */
+    align-items: flex-start;
+    margin-top: 20px; /* Añadir margen superior si es necesario */
+}
+
+/* Estilos comunes para tableros (propio y enemigo) */
+.tablero-propio, .tablero-enemigo {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr); /* 10 columnas + 1 para los encabezados */
+    grid-template-rows: repeat(11, 1fr);    /* 10 filas + 1 para los encabezados */
+    height: 500px; /* Ajusta la altura del tablero */
+    width: 500px;  /* Ajusta el ancho del tablero */
+    gap: 1px; /* Espacio entre las celdas */
+    border: 2px solid #000; /* Borde alrededor del tablero */
+    position: relative; /* Para manejar la colocación de los barcos */
+}
+
+/* Estilo para las celdas de encabezado */
+.tablero-propio .posición.header, .tablero-enemigo .posición.header {
+    color: #000;
+    background: lightgray;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; /* Tamaño de fuente de los encabezados */
+}
+
+/* Estilos para las celdas del tablero */
+.tablero-propio .posición, .tablero-enemigo .posición {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* Resaltar las celdas al pasar el mouse */
+.tablero-propio .posición:hover, .tablero-enemigo .posición:hover {
+    background-color: #f0f0f0;
+}
+
+/* Celdas ocupadas por los barcos */
+.tablero-propio .posición[data-ocupada="true"], .tablero-enemigo .posición[data-ocupada="true"] {
+    background-color: lightblue; /* Indicador visual de celdas ocupadas */
+}
+
+/* Estilo para las posiciones de letras y números en los encabezados */
+.tablero-propio .posición.header, .tablero-enemigo .posición.header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Tamaño de las celdas */
+.tablero-propio .posición, .tablero-enemigo .posición {
+    background-color: transparent;
+    font-size: 1rem; /* Tamaño de fuente para las celdas */
+}
+
+/* Estilos adicionales para la interfaz de usuario */
+
+
+.conexion-ws {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.server-operation, .client-operation {
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.server-operation:hover, .client-operation:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+
+body {
+    font-family: 'Rock Salt', cursive ,Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/sea.jpg'); 
+    background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */ 
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+hgroup h1{
+    margin-top: 0%;
+}
+
+hgroup {
+    text-align: center;
+    background-image: url('../images/table.jpg'); 
+    background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+    height: 100%;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 300px;
+}
+
+.opciones-navegación {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    background-color: #8B4513;
+    padding: 1rem;
+}
+
+.principal-index hgroup {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.opciones-navegación {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 1.5rem;
+    justify-content: end;
+    margin: 0;
+    padding: 0;
+}
+
+.opciones-navegación a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.opciones-navegación a:hover {
+    color: #F4A460;
+}
+
+#opciones-juegos {
+    font-family: 'Rock Salt', cursive;
+    font-size: 2rem;
+    color: #8B4513; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    padding: 20px;
+    margin-top: 50px;
+    margin-left: auto; 
+    margin-right: auto; 
+    border-radius: 10px;
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 5px;
+    width: 40%; 
+    background-image: url('../images/table.jpg'); 
+}
+
+
+#opciones-juegos a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: color 0.3s;
+    border-radius: 25px;
+    text-align: center;
+    background-color: #8B4513;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+#opciones-juegos a:hover {
+    background-color: #F4A460;
+}
+
+main h2 {
+    text-align: center;
+}
+
+.reglas-de-juego {
+    font-family: 'Rock Salt', cursive;
+    font-size: 1.5rem;
+    color: #fff; /* Color marrón para imitar la madera */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para dar efecto de profundidad */
+    padding: 20px;
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border: 5px solid #8B4513;
+    border-radius: 10px;
+    background-image: url('../images/table.jpg'); 
+}
+.atacar-enemigo-solo input{
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    border:#8B4513;
+}
+
+.barcoshundidos {
+    color: #FFFFFF; /* Blanco puro para el texto */
+    font-size: 28px; /* Tamaño de fuente más grande */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrar el texto */
+    margin-top: 10px; /* Espaciado superior */
+    text-shadow: 2px 2px 4px #000000; /* Sombra negra para destacar el texto */
+    background: none; /* Fondo completamente transparente */
+    border: none; /* Sin bordes */
+    padding: 10px; /* Espaciado interno */
+    width: 100%; /* Usar todo el ancho disponible */
+}
+
+
+
+.principal-jugar-solo a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+    border-radius: 25px;
+    text-align: center;
+    background-color: #8B4513;
+    padding: 15px 30px;
+}
+
+.principal-jugar-solo a:hover {
+    color: #F4A460;
+}
+
+
+
+.principal-jugar-dos a:hover {
+    color: #ffffff;
+}
+
+.principal-jugar-tres a{
+    color: #F4A460;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+    border: 5px solid #8B4513;
+    border-radius: 25px;
+    text-align: center;
+    background-color: #8B4513;
+    padding: 15px 30px;
+}
+
+.principal-jugar-tres a:hover {
+    color: #ffffff;
+}
+
+.principal-jugar-cuatro a{
+    color: #F4A460;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+    border: 5px solid #8B4513;
+    border-radius: 25px;
+    text-align: center;
+    background-color: #8B4513; 
+    padding: 15px 30px;
+}
+
+.principal-jugar-cuatro a:hover {
+    color: #ffffff;
+}
+
+#registro-usuario {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 20px;
+    border: 5px solid #8B4513;
+    border-radius: 10px;
+    background-image: url('../images/table.jpg'); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#registro-usuario h2 {
+    text-align: center;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+#registro-usuario label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+#registro-usuario input[type="text"],
+#registro-usuario input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+#registro-usuario input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #8B4513;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+}
+
+#registro-usuario input[type="submit"]:hover {
+    background-color: lightblue;
+}
+
+#opciones-multijugador {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: url('../images/table.jpg');
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 40px;
+}
+
+#opciones-multijugador a {
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+#opciones-multijugador a:hover {
+    background-color: #F4A460;
+}
+
+#opciones-multijugador button {
+    display: block;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    padding-top: 10px;  
+    padding-left: 125px;
+    padding-right: 125px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    border:#8B4513;
+    transition: background-color 0.3s ease;
+}
+
+#opciones-multijugador button:hover {
+    background-color: #F4A460;
+}
+
+#opciones-multijugador input {
+    display: block;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    border:#8B4513;
+}
+
+
+#mecanicas-multijugador {
+    font-family: 'Rock Salt', cursive;
+    font-size: 1.5rem;
+    color: #fff; /* Color marrón para imitar la madera */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para dar efecto de profundidad */
+    padding: 20px;
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+    background-image: url('../images/table.jpg'); 
+}
+
+#modo-torneo{
+    font-family: 'Rock Salt', cursive;
+    font-size: 1.5rem;
+    color: #fff; /* Color marrón para imitar la madera */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para dar efecto de profundidad */
+    padding: 20px;
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+    background-image: url('../images/table.jpg'); 
+}
+
+.top-10 {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-image: url('../images/table.jpg'); 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.top-10 h2 {
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+.top-10 ol {
+    list-style-type: decimal;
+    padding-left: 0;
+}
+
+.top-10 li {
+    background-color: #8B4513;
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    
+}
+
+.top-10 li:nth-child(1) {
+    background-color: gold;
+    color: black;
+}
+
+.top-10 li:nth-child(2) {
+    background-color: silver;
+    color: black;
+}
+
+.top-10 li:nth-child(3) {
+    background-color: #cd7f32; /* Bronze */
+    color: black;
+}
+
+#botón-jugar {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#botón-jugar a {
+    margin-top: 5px;
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#botón-jugar a:hover {
+    background-color: #F4A460;
+    transform: scale(1.05);
+}
+
+
+.cruiser {
+    background: url('../images/ship1.png') 0 0 no-repeat;
+    background-size: cover;
+    text-indent: 150%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.cruiser.tile-2 {
+  background-position: 0 calc(var(--posición-height) * -1);
+}
+
+.cruiser.tile-3 {
+  background-position: 0 calc(var(--posición-height) * -2.3);
+}
+
+.cruiser.tile-4 {
+  background-position: 0 calc(var(--posición-height) * -3.4);
+}
+
+.cruiser.horizontal {
+    transform: rotateZ(-90deg);
+}
+
+.contenedor-crear-unirse {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    justify-content: space-between; /* Alinea las columnas hacia los bordes */
+    align-items: center; /* Alinea verticalmente los elementos al centro */
+    width: 100%;
+    margin-top: 30px;
+}
+
+.generar-codigo,
+.unirse-a-juego {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button.server-operation {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #8B4513;
+}
+
+button.server-operation:hover {
+    background-color: #F4A460;
+}
+
+input.server-operation {
+    margin: 10px 0;
+    padding: 10px;/* Asegura que el input ocupe todo el ancho del contenedor */
+    border-radius: 25px;
+    border: 1px solid #8B4513;
+    background-color: #8B4513;
+    color: white;
+    text-align: center;
+}
+
+.informacion-partida{
+
+    margin-top: 100px;
+}
+
+
+
+
+
+.conexion-ws button{
+    margin: 20px 0;
+    padding-bottom: 10px;
+    padding-top: 10px;  
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    text-align: right;  /*        ACOMODAR Y TERMINAR        */
+    margin-right: 100px;
+    border:#8B4513;
+    margin-left: 44%;
+    margin-top: 30px;
+}
+
+.conexion-ws button:hover{
+    background-color: #F4A460;
+}
+
+#turno{
+    text-align: center;
+}
+
+button{
+    margin: 20px 0;
+    padding-bottom: 10px;
+    padding-top: 10px;  
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: #8B4513;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    text-align: center;  /*        ACOMODAR Y TERMINAR        */
+    margin-right: 100px;
+    border:#8B4513;
+    margin-left: 44%;
+    margin-top: 30px;
+}
+
+.jugador{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.contenedor-tablero{
+    flex-direction: column;
+}
+
+.conexion-ws{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
